@@ -1,4 +1,6 @@
 from utils import binary_utils
+
+
 # binary multiplication algorithm
 def multAlg(n, m):
 
@@ -72,5 +74,5 @@ def multAlg(n, m):
         prod = binary_utils.twosComp(prod, prodLen)
 
     print("Final Product: " + prod)
-    return
 
+    return

@@ -1,5 +1,6 @@
 from utils import binary_utils
 
+
 # binary division algorithm
 def divAlg(n, m):
     # lamda function to add two binary numbers together
