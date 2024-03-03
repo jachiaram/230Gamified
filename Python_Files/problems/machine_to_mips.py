@@ -2,17 +2,6 @@ from utils import binary_utils
 import random
 
 
-#pads binary to the correct number of bits
-def binPadding(n, e):
-    
-    n = n[2:]
-    toPad = e - len(n)
-    i = 0
-    while i < toPad:
-        n = "0" + n
-        i += 1
-    return n
-
 # basic machine to mips game
 def machToMips():
     registers = ["$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra"]
@@ -54,10 +43,10 @@ def machToMips():
     print("Mips instruction: ", mnemonic, rd, rs, rt)
 
     #padding routine 
-    rdNum = binPadding(bin(rdNum), 5)
-    rsNum = binPadding(bin(rsNum), 5)
-    rtNum = binPadding(bin(rtNum), 5)
-    funct = binPadding(bin(funct), 6)
+    rdNum = binary_utils.binPadding(bin(rdNum), 5)
+    rsNum = binary_utils.binPadding(bin(rsNum), 5)
+    rtNum = binary_utils.binPadding(bin(rtNum), 5)
+    funct = binary_utils.binPadding(bin(funct), 6)
 
 
     binMachineCode = "000000" + rdNum + rsNum + rtNum + "00000" + funct
