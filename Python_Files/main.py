@@ -1,6 +1,7 @@
 import os
-import problems.multiply_algorithm as multiply_algorithm
-import problems.division_algorithm as division_algorithm
+# import problems.multiply_algorithm as multiply_algorithm
+# import problems.division_algorithm as division_algorithm
+import utils.quiz_prompter as quiz
 
 
 # Determines whether system is unix or windows based,
@@ -24,7 +25,7 @@ def mainMenuLoop():
                                                                                     
     """
 
-    userInput = "c"
+    userInput = ""
     while not userInput == "q":
 
         print(title)
@@ -34,12 +35,15 @@ def mainMenuLoop():
         userInput = input("enter choice:")
 
         if userInput == '1':
-            multiply_algorithm.multAlg(4, 4)
+            # multiply_algorithm.multAlg(4, 4)
+            quiz.gameLoop(1)
         elif userInput == '2':
-            division_algorithm.divAlg(4, 4)
+            # division_algorithm.divAlg(4, 4)
+            quiz.gameLoop(2)
         else:
             clearTerminalWindow()
             continue
 
 
 mainMenuLoop()
+

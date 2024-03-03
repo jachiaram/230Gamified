@@ -1,9 +1,23 @@
 from utils import binary_utils
+from utils import quiz_prompter as prompt
+from types import SimpleNamespace
+
+
+questionNames = ["Multiplicand", "Multiplier ", "Product: "]
+problemVals = SimpleNamespace(promptString="", expectedValue="")
+maxAttempts = 5
+attempts = 0
+
+def multiplicationPrompt(multd, multr):
+    initial_prompt = ("Use the multiplication algorithm "
+                      + "to multiply " + multd + " and " + multr)
+    print(initial_prompt)
 
 
 # binary multiplication algorithm
 def multAlg(n, m):
-
+    global attempts
+    attempts = 0
     # lamda function to add two binary numbers together
     binarySum = lambda a, b: bin(int(a, 2) + int(b, 2))
 
@@ -11,68 +25,75 @@ def multAlg(n, m):
     multd = binary_utils.generateRandomBinary(n)
     multr = binary_utils.generateRandomBinary(m)
 
-    # multd = "1010"
-    # multr = "0100"
-
     # set up product string
     prod = ""
     prodLen = n + m
-
     # populate prod with zeros
     for i in range(prodLen):
         prod += "0"
+
+    questionVals = [multd, multr, prod]
 
     # bool values to check if multd and multr are 2's comp
     dComp = False
     rComp = False
 
-    print("Use the multiplication algorithm to multiply " + multd + " and " + multr)
+    multiplicationPrompt(multd, multr)
 
     # check for leading bit 1, if 2's comp numbers
-    if multd[0] == "1":
+    if questionVals[0][0] == "1":
         dComp = True
-        multd = binary_utils.twosComp(multd, n)
+        questionVals[0] = binary_utils.twosComp(questionVals[0], n)
 
-    if multr[0] == "1":
+    if questionVals[1][0] == "1":
         rComp = True
-        multr = binary_utils.twosComp(multr, m)
+        questionVals[1] = binary_utils.twosComp(questionVals[1], m)
 
-    print("Initial Values: ")
-    print("Multiplicand: " + multd)
-    print("Multiplier: " + multr)
-    print("Product: " + prod + "\n")
+    for i in range(3):
+        if attempts >= maxAttempts:
+            return False
+        problemVals.promptString = questionNames[i]
+        problemVals.expectedValue = questionVals[i]
+        if not prompt.answerLoop(problemVals.promptString, problemVals.expectedValue):
+            attempts += 1
+    # print("Multiplier: " + multr)
+    # print("Product: " + prod + "\n")
 
     size = m
     for i in range(m):
-        # if ending bit is 1 add to product
-        if multr[size - 1] == "1":
-            prod = binarySum(prod, multd)
+        # if ending bit is 1 add multiplicand to product
+        if questionVals[1][size - 1] == "1":
+            tempStr = binarySum(questionVals[2], questionVals[0])
+            questionVals[2] = tempStr[2:]  # removes 0b
+
+        curlen = len(questionVals[2])
+        while curlen < prodLen:
+            questionVals[2] += "0"
+            curlen += 1
 
         # shift multd left
-        multd = multd + "0"
+        questionVals[0] += "0"
 
         # shift multr right
-        multr = list(multr)
-        multr.pop()
-        multr = "".join(multr)
+
+        shiftString = ("0" + questionVals[1])
+        questionVals[1] = shiftString[:-1]
+        # multr = list(multr)
+        # multr.pop()
+        # multr = "".join(multr)
         size = size - 1
-
-        # print out current values
-        print("The current multiplicand: " + multd)
-        print("The current multiplier: " + multr)
-        print("The current product: " + prod + "\n")
-
-    # check length of prod string, pad to correct number of bits
-    prod = prod[2:]
-    curlen = len(prod)
-    while curlen < prodLen:
-        prod = "0" + prod
-        curlen += 1
+        for i in range(3):
+            if attempts >= maxAttempts:
+                return False
+            problemVals.promptString = questionNames[i]
+            problemVals.expectedValue = questionVals[i]
+            if not prompt.answerLoop(problemVals.promptString, problemVals.expectedValue):
+                attempts += 1
 
     # check for need to 2's comp the prod
-    if (dComp == True and rComp == False) or (dComp == False and rComp == True):
+    if dComp and not rComp or not dComp and rComp:
         prod = binary_utils.twosComp(prod, prodLen)
 
-    print("Final Product: " + prod)
+    print("Final Product: " + questionVals[2])
 
-    return
+    return True
