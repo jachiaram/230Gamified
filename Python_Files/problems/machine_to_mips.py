@@ -2,16 +2,16 @@ from utils import binary_utils
 import random
 
 
-class MipsInstruct:
-    functType = ""
-    opcode = ""
-    mnemonic = ""
-    # this should always follow this order rd, rs, rt
-    registers = ["", "", ""]
-    shamt = ""
-    funct = ""
-    imm = ""
-
+#pads binary to the correct number of bits
+def binPadding(n, e):
+    
+    n = n[2:]
+    toPad = e - len(n)
+    i = 0
+    while i < toPad:
+        n = "0" + n
+        i += 1
+    return n
 
 # basic machine to mips game
 def machToMips():
