@@ -117,6 +117,8 @@ def machToMips():
     hex_str = hexNum[2:]
     hex_str = "0x0" + hex_str
 
+    # TODO: Fix lack of leading zeros on certain instructions
+
     # print("Corresponding Binary: ", binMachineCode)
     # print("Corresponding machine code", hex_str)
 
