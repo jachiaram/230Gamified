@@ -33,7 +33,7 @@ def gameLoop(problemType):
 # re-prompts user until answer is correct
 def answerLoop(expectedValueType, expectedValue):
 
-    givenVal = input(expectedValueType + ": ")
+    givenVal = input(expectedValueType + ": ").lower()
     if givenVal == expectedValue:
         print("correct!")
         return True
@@ -49,7 +49,7 @@ def answerLoop(expectedValueType, expectedValue):
 
         print("That answer was incorrect" + "\n"
               + "Try again! OR <q> to quit OR <g> to give up")
-        givenVal = input(expectedValueType + ": ")
+        givenVal = input(expectedValueType + ": ").lower()
 
         if givenVal == 'q':  # quit
             print("\n-------------------\nThanks for Playing!")

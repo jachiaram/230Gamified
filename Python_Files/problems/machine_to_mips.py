@@ -113,11 +113,17 @@ def machToMips():
     funct = binary_utils.binPadding(bin(funct), 6)
 
     binMachineCode = "000000" + rsNum + rtNum + rdNum + "00000" + funct
-    hexNum = hex(int(binMachineCode, base=2))
+    hexNum = hex(int(binMachineCode, base=2))  # hex conversion, but removes leading 0s
     hex_str = hexNum[2:]
-    hex_str = hex_str.upper()
-    hex_str = "0x0" + hex_str
-    # TODO: Fix lack of leading zeros on certain instructions
+
+    # add back leading 0s
+    while True:
+        if len(hex_str) < 8:
+            hex_str = "0" + hex_str
+        else:
+            hex_str = "0x" + hex_str
+            hex_str = hex_str.lower()
+            break
 
     # print("Corresponding Binary: ", binMachineCode)
     # print("Corresponding machine code", hex_str)
