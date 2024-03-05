@@ -10,3 +10,6 @@ Work through a binary multiplication problem using the same algorithm that MIPS 
 
 ### Binary Division Algorithm
 Work through a binary division problem using the same algorithm that MIPS architecture uses.
+
+### MIPS To Machine Code
+Translate MIPS Instructions directly to hex formatted machine code.
