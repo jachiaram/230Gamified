@@ -2,6 +2,7 @@
 # quizzing portion of the application
 from problems import multiply_algorithm as mprob
 from problems import division_algorithm as dprob
+from problems import machine_to_mips as machineprob
 
 
 # Determines question based on problemType, then handles accordingly
@@ -10,6 +11,8 @@ def questionGenerator(problemType):
         return mprob.multAlg(4, 4)
     if problemType == 2:
         return dprob.divAlg(4, 4)
+    if problemType == 3:
+        return machineprob.machToMips()
 
 
 def writeState(current_question):
@@ -46,7 +49,7 @@ def answerLoop(expectedValueType, expectedValue):
 
         print("That answer was incorrect" + "\n"
               + "Try again! OR <q> to quit OR <g> to give up")
-        givenVal = input("New " + expectedValueType + ": ")
+        givenVal = input(expectedValueType + ": ")
 
         if givenVal == 'q':  # quit
             print("\n-------------------\nThanks for Playing!")

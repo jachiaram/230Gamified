@@ -49,9 +49,10 @@ def twosComp(n, size):
 
     return binResult
 
-#pads binary to the correct number of bits
+
+# pads binary to the correct number of bits
 def binPadding(n, e):
-    
+
     n = n[2:]
     toPad = e - len(n)
     i = 0
