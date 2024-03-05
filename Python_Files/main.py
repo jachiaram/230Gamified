@@ -43,6 +43,7 @@ def mainMenuLoop():
             # division_algorithm.divAlg(4, 4)
             quiz.gameLoop(2)
         elif userInput == '3':
+            print("3 chosen")
             machine_to_mips.machToMips()
         else:
             clearTerminalWindow()
@@ -50,4 +51,3 @@ def mainMenuLoop():
 
 
 mainMenuLoop()
-
