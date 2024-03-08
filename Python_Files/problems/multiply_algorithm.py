@@ -12,14 +12,16 @@ def multiplicationPrompt(multd, multr):
     initial_prompt = ("Use the multiplication algorithm "
                       + "to multiply " + multd + " and " + multr)
     print(initial_prompt)
-
+def binarySum(a, b):
+    # lamda function to add two binary numbers together
+    sum = bin(int(a, 2) + int(b, 2))
+    print("binarySum function Call:::::" + sum)
+    return sum
 
 # binary multiplication algorithm
 def multAlg(n, m):
     global attempts
     attempts = 0
-    # lamda function to add two binary numbers together
-    binarySum = lambda a, b: bin(int(a, 2) + int(b, 2))
 
     # generate random binary numbers to be multiplied
     multd = binary_utils.generateRandomBinary(n)
@@ -68,7 +70,7 @@ def multAlg(n, m):
 
         curlen = len(questionVals[2])
         while curlen < prodLen:
-            questionVals[2] += "0"
+            questionVals[2] = "0" + questionVals[2]
             curlen += 1
 
         # shift multd left
