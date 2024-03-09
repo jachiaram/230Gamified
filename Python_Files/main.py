@@ -50,5 +50,5 @@ def mainMenuLoop():
             continue
 
 
-machine_to_mips.machToMips()
-#mainMenuLoop()
+#machine_to_mips.machToMips()
+mainMenuLoop()
