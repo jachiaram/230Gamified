@@ -49,6 +49,4 @@ def mainMenuLoop():
             clearTerminalWindow()
             continue
 
-
-#machine_to_mips.machToMips()
 mainMenuLoop()
